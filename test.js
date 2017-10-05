@@ -1,5 +1,5 @@
 var test = require('tape')
-var compose = require('./index')
+var composeN = require('./index')
 
 test('test compose', t => {
   function plusOne (i) {
@@ -14,12 +14,12 @@ test('test compose', t => {
     return i + 5
   }
 
-  var squarePlusOne = compose(squared, plusOne)
+  var squarePlusOne = composeN(squared, plusOne)
 
   t.equals(squarePlusOne(2), 9, 'works')
 
-  var a = [plusOne, squared, plus5].reduce(compose)
+  var a = composeN(plusOne, squared, plus5)
 
-  t.equals(a(2), 9, 'works')
+  t.equals(a(2), 50, 'works')
   t.end()
 })
